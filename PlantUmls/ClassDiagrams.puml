@@ -1,0 +1,58 @@
+@startuml
+
+title Pomodoro components
+
+class Project {
+String projectName
+Task[] tasks
+create : Project {String projectName}
+addTask : void {Task task}
+addTasks : void {Task[] tasks}
+getTasks : Task[] {}
+getTask : Task {String taskname}
+removeTask : Task {Task task}
+}
+
+interface Task {
+String taskname
+Kibarua[] checklist
+
+create : Task {String taskname}
+addKibarua : Kibarua {Kibarua kibarua}
+addVibarua : Kibarua {Kibarua[] vibarua}
+removeKibarua : Kibarua {Kibarua kibarua}
+}
+
+class Kibarua {
+String name
+Pomodoro[] pomodoros
+boolean completed
+
+create : Kibarua {String name}
+addPomodoro : Pomodoro {Pomodoro pomodoro}
+addPomodoros : Pomodoro {Pomodoro[] pomodoros}
+removePomodoro : Pomodoro {Pomodoro pomodoro}
+}
+
+class Pomodoro {
+Pom type 
+Comment[] comments
+
+create : Pomodoro {Pom pomType}
+addComment : Comment {Comment comment}
+removeComment : Comment {Comment comment}
+}
+
+class Comment {
+String message
+
+create : Comment {String message}
+}
+
+enum Pom {
+L = "25 mins",
+M = "15 mins",
+s = "10mins"
+}
+
+@enduml

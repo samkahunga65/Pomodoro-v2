@@ -1,0 +1,18 @@
+@startuml
+jinn -> User: Hi, Sam. Welcome. \n Project completion 12% \n new kibarua (n) new task (t) \n Pending tasks \n a --- {}% \n b--- {}%
+User -> jinn: input
+alt a,b,c..
+    jinn -> User: Pending vibarua \n  a --- {}%
+    User -> jinn: input
+    jinn -> User: {Task name} \n start (s) main menu (m)
+    alt s
+        jinn -> User: pause (p)
+        User -> jinn:
+        jinn -> User: unpause (p)
+    else m
+        jinn -> User: \n Project completion 12% \n new kibarua (n) new task (t) \n Pending tasks \n a --- {}% \n b--- {}%
+    end
+else t
+    jinn -> User: add task name
+end
+@enduml

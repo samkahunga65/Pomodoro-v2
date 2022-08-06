@@ -2,6 +2,26 @@
 
 title Pomodoro components
 
+class KibaruaRepository {
+    ArrayList<Kibarua> vibarua;
+    getKibarua : Kibarua;
+    saveVibarua : void;
+    writeToFile : void;
+}
+
+class Jinn {
+    boolean summoned;
+    Scanner input;
+    init : void;
+
+}
+class Timer {
+    LocalDateTime startTime;
+    LocalDateTime pausedTime;
+    pauseTimer : void;
+    getTimeElapsed : LocalDateTime timeElapsed;
+}
+
 class Project {
 String projectName
 Task[] tasks

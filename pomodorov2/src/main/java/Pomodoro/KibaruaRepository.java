@@ -1,11 +1,8 @@
 package Pomodoro;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Objects;
-import java.util.Scanner;
 import java.util.UUID;
 
 public class KibaruaRepository {
@@ -25,7 +22,6 @@ public class KibaruaRepository {
         this.vibarua.add(kibarua);
         saveToFile();
     }
-    ArrayList<Kibarua> 
     Kibarua getKibarua(String name) {
         return vibarua.stream().filter(kibarua -> Objects.equals(kibarua.name, name)).findFirst().orElse(null);
     }

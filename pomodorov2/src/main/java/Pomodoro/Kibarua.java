@@ -11,6 +11,8 @@ public class Kibarua implements Serializable {
     static String saveFile = "vibarua";
     String name;
     UUID taskId;
+    Pomodoro[] pomodoros;
+    boolean completed = false;
 
     public UUID getId() {
         return id;
@@ -35,9 +37,6 @@ public class Kibarua implements Serializable {
     public void setTaskId(UUID taskId) {
         this.taskId = taskId;
     }
-
-    Pomodoro[] pomodoros;
-    boolean completed = false;
 
     Kibarua(String name, UUID taskId) {
         this.taskId = taskId;

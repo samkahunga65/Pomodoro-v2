@@ -8,6 +8,7 @@ import java.util.UUID;
 public class Timer {
     UUID id = UUID.randomUUID();
     Long timeStarted;
+    Long timeToEnd;
     Long pausedSeconds = 0L;
     Long startPauseTime;
     boolean paused = false;

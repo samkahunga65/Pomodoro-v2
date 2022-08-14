@@ -14,11 +14,7 @@ public class Task {
     UUID id = UUID.randomUUID();
     String name;
     ArrayList<Kibarua> vibarua;
-    ArrayList<Kibarua> incompleteKibarua;
-
-    public Kibarua[] getVibarua() {
-        return vibarua.toArray(Kibarua[]::new);
-    }
+    private ArrayList<Kibarua> incompleteKibarua;
 
     String toJson() throws JsonProcessingException {
         return new ObjectMapper().writeValueAsString(this);

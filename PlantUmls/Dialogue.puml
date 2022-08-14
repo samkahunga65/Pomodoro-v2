@@ -1,0 +1,19 @@
+@startuml
+
+MainMenuDialog --> ProjectDialog
+ProjectDialog --> VibaruaDialog
+VibaruaDialog --> KibaruaDialog
+KibaruaDialog --> VibaruaDialog
+VibaruaDialog --> ProjectDialog
+ProjectDialog --> MainMenuDialog
+VibaruaDialog --> MainMenuDialog
+
+MainMenuDialog : Question -> Projects / go to vibarua
+MainMenuDialog : Options -> Projects[] : xx%
+ProjectDialog : Question -> Tasks / go to vibarua
+ProjectDialog : Question -> Tasks[] : xx%
+VibaruaDialog : Question -> vibarua / go to vibarua
+VibaruaDialog : Question -> Kibarua[] : xx%
+KibaruaDialog : kibarua name + pomodoros \n startPomodoro / pausePomodoro / completeKibarua
+
+@enduml

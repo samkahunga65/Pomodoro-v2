@@ -12,6 +12,7 @@ public class Kibarua implements Serializable {
     String name;
     UUID taskId;
     Pomodoro[] pomodoros;
+    boolean pomodorosAreActive;
     boolean completed = false;
 
     public UUID getId() {
@@ -41,6 +42,7 @@ public class Kibarua implements Serializable {
     Kibarua(String name, UUID taskId) {
         this.taskId = taskId;
         this.name = name;
+        this.pomodorosAreActive = false;
     }
     boolean done() {
         return completed;
@@ -51,5 +53,17 @@ public class Kibarua implements Serializable {
 
     String toJson() throws JsonProcessingException {
         return new ObjectMapper().writeValueAsString(this);
+    }
+    void startPomodoro() {
+        var pom = new Pomodoro();
+        pom
+    }
+    String getQuestion() {
+        if(completed) {
+            return "kibarua is completed with " + pomodoros.length + "pomodoros";
+        }
+        String outString = name + "\n(s) start pomodoro \n(c) complete kibarua";
+
+        return outString;
     }
 }

@@ -1,62 +1,62 @@
 package Pomodoro;
 
 import java.util.ArrayList;
-import java.util.Objects;
 import java.util.Scanner;
 
 public class Jinn {
-    String startStatement = "Hi, Sam. Welcome. \\n Project completion 12% \\n new kibarua (n) new task (t) \\n Pending tasks";
-    ArrayList<String> pendingTasks;
-    ArrayList<String> pendingVibarua;
-    boolean summoned;
-    Menus state = Menus.PROJECTSMENU;
-    Scanner scanner;
-    boolean timerInProgress = false;
-    String lastInput = "";
-    Timer timer;
     ArrayList<Project> projects;
-    ArrayList<Task> currTasks;
-    Project currProject;
-    boolean activePomodoro = false;
-    Task currTask;
-    Kibarua currKibarua;
+    Project currentProject;
+    Task currentTask;
+    String lastInput = "";
+    Scanner scanner;
+    Menu currentMenu;
+    Kibarua currentKibarua;
+    boolean currentKibaruActive;
     Jinn(ArrayList<Project> projects) {
-        this.scanner = new Scanner(System.in);
         this.projects = projects;
+        System.out.println("projects :\n");
+        projects.forEach(project -> System.out.println(project.name + ":" + project.getCompletionPercentage() + "\n"));
+        currentMenu = Menu.PROJECTSMENU;
+        this.scanner = new Scanner(System.in);
+        currentKibaruActive = false;
     }
-
     void summon() {
-        var inputWasNumber = checkIfNumber(scanner.next());
-        while (summoned && !Objects.equals(lastInput, "x")) {
-            if (state == Menus.PROJECTSMENU) {
-                if (inputWasNumber) {
-                    currProject= projects.get(Integer.parseInt(scanner.next()));
-                    System.out.println(currProject.getQuestion());
-                    state = Menus.TASKSMENU;
+        while (lastInput != "q") {
+            if (inputIsInteger(scanner.next())) {
+                var input = Integer.parseInt(scanner.next());
+                switch (currentMenu) {
+                    case PROJECTSMENU:
+                        if(input > projects.size()) {
+                            System.out.println("choose a valid option");
+                        } else {
+                            currentProject = projects.get(input);
+                            System.out.println(currentProject.getQuestion());
+                            currentMenu = Menu.TASKSMENU;
+                        }
+                    case TASKSMENU:
+                        if(input > currentProject.tasks.size()) {
+                            System.out.println("choose a valid option");
+                        } else {
+                            currentTask = currentProject.tasks.get(input);
+                            System.out.println(currentTask.getQuestion());
+                            currentMenu = Menu.KIBARUAMENU;
+                        }
+                    case KIBARUAMENU:
+                        if (!currentKibaruActive){
+                        if(input > currentTask.vibarua.size()) {
+                            System.out.println("choose a valid option");
+                        } else {
+                            currentKibarua = currentTask.vibarua.get(input);
+                            System.out.println(currentKibarua.getQuestion());
+                        }
+                        }
+                    default :
+                        break;
                 }
-
-            } else if (state == Menus.TASKSMENU) {
-                if (inputWasNumber) {
-                    currTask = currProject.tasks.get(Integer.parseInt(scanner.next()));
-                    System.out.println(currTask.getQuestion());
-                    state = Menus.KIBARUAMENU;
-                }
-
             } else {
-                System.out.println("(x) complete task \n");
-                if (!activePomodoro) {
-                    System.out.println("(s) start pomodoro \n");
-                } else {
-                    System.out.println("(p) pause pomodoro \n");
-                }
-                if (inputWasNumber) {
-                    currKibarua = currTask.getVibarua()[Integer.parseInt(scanner.next())];
-                }
                 switch (scanner.next()) {
-                    case "x":
-                        currTask.complete = true;
-                        state = Menus.TASKSMENU;
-                        System.out.println(cu);
+                    case "s":
+                        currentKibarua.
                     default :
                         break;
                 }
@@ -64,17 +64,13 @@ public class Jinn {
             lastInput = scanner.next();
         }
     }
-    void handleInput(String input, Menus state, ArrayList<Project> projects) {
-        var isInputNumber = checkIfNumber(input);
-
-    }
-    boolean checkIfNumber(String str) {
+    boolean inputIsInteger(String str) {
         return str.matches("-?\\d+(\\.\\d+)?");
     }
 }
 
-enum Menus {
+enum Menu {
     PROJECTSMENU,
     TASKSMENU,
-    KIBARUAMENU;
+    KIBARUAMENU
 }
